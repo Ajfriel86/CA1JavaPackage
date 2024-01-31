@@ -96,4 +96,15 @@ public class FileService {
             }
         }
     }
+
+    // Method to display the contents of the students file
+    public void displayStudentsFile() {
+        List<String> studentLines = readLinesFromFile("students.txt"); // Read lines from the students file
+        if (!studentLines.isEmpty()) {
+            System.out.println("\u001B[32mContents of students.txt:");
+            for (String line : studentLines) {
+                System.out.println(line); // Print each line from the students file
+            }
+        }
+    }
 }
