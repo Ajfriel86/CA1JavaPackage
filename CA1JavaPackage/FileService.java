@@ -86,4 +86,14 @@ public class FileService {
         }
     }
     
+    // Method to display invalid lines from a file
+    public void displayInvalidLines(String fileName) {
+        List<String> invalidLines = readLinesFromFile(fileName); // Read lines from the file
+        if (!invalidLines.isEmpty()) {
+            System.out.println("\u001B[31m!!!!!! - Invalid data found in file:");
+            for (String line : invalidLines) {
+                System.out.println(line); // Print each invalid line
+            }
+        }
+    }
 }
