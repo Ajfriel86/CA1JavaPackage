@@ -120,7 +120,10 @@ public class StudentProcessor{
                     System.out.println("\u001B[31mInvalid choice. Please try again.");
             }
         }
-
+        // closes the scanner
+        scanner.close();
+        // Displays a farewell message
+        System.out.println("\u001B[32mProgram exited. Goodbye :)");    
     }
 }
 
