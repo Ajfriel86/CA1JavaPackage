@@ -68,5 +68,22 @@ public class FileService {
         return true; // Return true if the file format is valid
     }
 
+    // Method to display the contents of the status file
+    public void displayStatusFile() {
+        File file = new File("status.txt");
+        if (!file.exists()) {
+            System.out.println("\u001B[31mstatus.txt does not exist.");
+            return;
+        }
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line); // Print each line of the file
+            }
+        } catch (IOException e) {
+            // Print an error message if an IOException occurs
+            System.err.println("\u001B[31m!!!!!! - An error occurred while reading the file: " + e.getMessage());
+        }
+    }
     
 }
