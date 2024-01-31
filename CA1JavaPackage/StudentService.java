@@ -124,5 +124,22 @@ public class StudentService {
             System.err.println("\u001B[31m!!!!!! - An error occurred while writing to the file: " + e.getMessage());
         }
     }
-    
+
+    // Method to process and write data to a status file
+    public void processAndWriteData() {
+        // Read student data from a file
+        List<Student> students = StudentFileReader.readStudentsFromFile("students.txt");
+        try (PrintWriter writer = new PrintWriter("status.txt")) {
+            // Write each student's status to the file
+            for (Student student : students) {
+                writer.println(student.getStudentNumber() + " - " + student.getLastName());
+                writer.println(student.determineWorkload());
+            }
+        } 
+        // This catches and handles FileNotFoundException's that might occur during file writing, and displaying an error message in red 
+        catch (FileNotFoundException e) {
+            System.out.println();
+            System.err.println("\u001B[31m!!!!!! - An error occurred: " + e.getMessage());
+        }
+    }
 }
