@@ -48,7 +48,7 @@ public class StudentProcessor{
             System.out.println();
             scanner.nextLine();
 
-            / Defining a variable that will be used to return the user to the main menu
+            // Defining a variable that will be used to return the user to the main menu
             String returnToMenuChoice;
 
             switch (choice) {
