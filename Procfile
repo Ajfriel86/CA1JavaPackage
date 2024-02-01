@@ -1,1 +1,1 @@
-web: java -CA1JAVAPACKAGE.jar
+web: java -jar CA1JAVAPACKAGE.jar
