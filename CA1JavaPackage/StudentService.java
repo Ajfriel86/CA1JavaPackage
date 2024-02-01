@@ -1,7 +1,6 @@
 // Author: Angus Friel
 // Student Number: sba22066
 // GitHub: https://github.com/Ajfriel86/CA1JavaPackage
-// Deployed site:
 
 //Declaring package
 package CA1JavaPackage;
