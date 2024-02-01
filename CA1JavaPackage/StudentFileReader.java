@@ -6,7 +6,7 @@
 //Declaring package
 package CA1JavaPackage;
 
-// Importing libraries
+// Importing necessary Java libraries
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
