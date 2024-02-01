@@ -3,127 +3,90 @@
 // GitHub:
 // Deployed site:
 
+// Declare package
 package CA1JavaPackage;
 
-// Importing libraries
-import java.util.*;
+// Importing necessary Java libraries
+import java.util.Scanner;
 
-public class StudentProcessor{
-    // Create an instance of FileService at the class level
+// Main class for processing student data
+public class StudentProcessor {
+
+    // Creating instances of FileService and StudentService at the class level
     private static FileService fileService = new FileService();
-
-    // Create an instance of StudentService at the class level
     private static StudentService studentService = new StudentService();
 
-    //Defining the main class for running the program
+    // Main method for processing student data with the application
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        boolean exit = false;
+        Scanner scanner = new Scanner(System.in); // Scanner for reading user input
+        boolean exit = false; // Boolean flag to help signal different states and control exit of the application
+        ConsoleClear.clearConsole(); // Clear the console before application starts
 
-        // While loop that displays the menu of options for the user
+        // Main loop for the menu-driven interface
         while (!exit) {
-            // Clears the console
-            ConsoleClear.clearConsole();
-
-            // Menu items for the user to select from
-            System.out.println();
-            System.out.println("\u001B[32mMenu:");
-            System.out.println("\u001B[34m1. Add new student data in the format stated below: ");
-            System.out.println("\u001B[32m-   <first name> <second name>");
-            System.out.println("\u001B[32m-   <number of classes>");
-            System.out.println("\u001B[32m-   <student number> (format (2)Numbers(3)Letters(4)Numbers, with the last 4 numbers being 2020 or higher)");
-            System.out.println();
-            System.out.println("\u001B[34m2. Check contents of student.txt is a valid format");
-            System.out.println("\u001B[32m-   This will display all the current entries of student.txt ");
-            System.out.println();
-            System.out.println("\u001B[34m3. Display status.txt");
-            System.out.println();
-            System.out.println("\u001B[34m4. Display students.txt");
-            System.out.println();
-            System.out.println("\u001B[31m5. Exit");
-            System.out.println();
-            System.out.print("\u001B[33mEnter your choice: ");
-            System.out.println();
-            int choice = scanner.nextInt();
-            System.out.println();
-            scanner.nextLine();
-
-            // Defining a variable that will be used to return the user to the main menu
-            String returnToMenuChoice;
-
+            displayMenu(); // Displaying the menu options
+            int choice = scanner.nextInt(); // Reading the user's choice
+            scanner.nextLine(); // Clearing the scanner buffer
+            ConsoleClear.clearConsole(); // Clear the console before application starts
+            // Switch case to handle different menu choices
             switch (choice) {
                 case 1:
-                    // Call the method to add new student data
-                    studentService.addNewStudentData(scanner);
-                    studentService.processAndWriteData();
+                    ConsoleClear.clearConsole(); // Clear the console
+                    studentService.addNewStudentData(scanner); // Add new student data
+                    studentService.processAndWriteData(); // Process and write data to the file
                     break;
                 case 2:
-                        // Check file format using fileService
-                        boolean isValidFormat = fileService.isValidStudentFileFormat("students.txt");
-                        if (isValidFormat) {
-                            // Prints a message in green stating format uis correct
-                            System.out.println("\u001B[32mstudents.txt is in the correct format.");
-                            System.out.println();
-                        } else {
-                            //  Displays an error message in red that the format is incorrect
-                            System.out.println("\u001B[31mstudents.txt is not in the correct format.");
-                            System.out.println();
-                            // Display invalid lines
-                            fileService.displayInvalidLines("students.txt");
-                        }
-                        // Ask the user if they want to return to the main menu
-                        System.out.println();
-                        System.out.print("\\u001B[32mDo you want to return to the main menu? (yes/no): ");
-                        System.out.println();
-                        //Initializing the variable returnToMenuChoice so the user can return to the main menu
-                        returnToMenuChoice = scanner.nextLine();
-                        // If the user selects Y or YES the return to the main menu, if the user selects N ot NO then program ends
-                        if ("Y".equalsIgnoreCase(returnToMenuChoice) || "YES".equalsIgnoreCase(returnToMenuChoice)) {
-                            // Clear the console and return to the main menu
-                            ConsoleClear.clearConsole();
-                        }
-                        break;
+                    ConsoleClear.clearConsole(); // Clear the console
+                    fileService.validateAndDisplayFileFormat(); // Validate and display the file format
+                    // Check if the user wants to exit the program after validation
+                    boolean shouldExit = MenuService.promptReturnToMenu(scanner);
+                    if (shouldExit) {
+                        exit = true;
+                    }
+                    break;
                 case 3:
-                    // Display status.txt using fileService
-                    fileService.displayStatusFile();
-                    System.out.println();
-                    // Ask the user if they want to return to the main menu
-                    System.out.print("\\u001B[32mDo you want to return to the main menu? (yes/no): ");
-                    //Initializing the variable returnToMenuChoice so the user can return to the main menu
-                    returnToMenuChoice = scanner.nextLine();
-                    // If the user selects Y or YES the return to the main menu, if the user selects N ot NO then program ends
-                    if ("Y".equalsIgnoreCase(returnToMenuChoice) || "YES".equalsIgnoreCase(returnToMenuChoice)) {
-                        // Clear the console and return to the main menu
-                        ConsoleClear.clearConsole();
-                        break;
-                    }
+                    ConsoleClear.clearConsole(); // Clear the console
+                    fileService.handleInvalidEntries(scanner); // Handle invalid entries in the students file
+                    // Prompt the user to return to the menu or exit the program
+                    exit = MenuService.promptReturnToMenu(scanner);
+                    break;
                 case 4:
-                    // Displays the students.txt file
-                    fileService.displayStudentsFile();
-                    // Ask the user if they want to return to the main menu
-                    System.out.println();
-                    System.out.print("\\u001B[32mDo you want to return to the main menu? (yes/no): ");
-                    //Initializing the variable returnToMenuChoice so the user can return to the main menu
-                    returnToMenuChoice = scanner.nextLine();
-                    // If the user selects Y or YES the return to the main menu, if the user selects N ot NO then program ends
-                    if ("Y".equalsIgnoreCase(returnToMenuChoice) || "YES".equalsIgnoreCase(returnToMenuChoice)) {
-                        // Clear the console and return to the main menu
-                        ConsoleClear.clearConsole();
-                        break;
-                    }
+                    ConsoleClear.clearConsole(); // Clear the console
+                    fileService.displayStatusFile(); // Display the status file
+                    // Prompt the user to return to the menu or exit the program
+                    exit = MenuService.promptReturnToMenu(scanner);
+                    break;
                 case 5:
-                    // end the program 
-                    exit = true;
+                    exit = true; // Set the exit flag to true to exit the program
                     break;
                 default:
-                    // displays an error message if the user selects an invalid choice from the menu 
-                    System.out.println("\u001B[31mInvalid choice. Please try again.");
+                    System.out.println("\u001B[31mInvalid choice. Please try again."); // Handle invalid menu choices
             }
         }
-        // closes the scanner
-        scanner.close();
-        // Displays a farewell message
-        System.out.println("\u001B[32mProgram exited. Goodbye :)");    
+
+        scanner.close(); // Close the scanner resource
+        System.out.println("\u001B[32mProgram exited. Goodbye :)"); // Exit message
+    }
+
+    // Method to display the menu options to the user
+    private static void displayMenu() {
+        System.out.println();
+        System.out.println("\u001B[32mMenu:");
+        System.out.println("\u001B[34m1. Add new student data in the format stated below:");
+        System.out.println("\u001B[32m-   <first name> <second name>");
+        System.out.println("\u001B[32m-   <number of classes>");
+        System.out.println("\u001B[32m-   <student number> (format (2)Numbers(3)Letters(4)Numbers, with the last 4 numbers being 2020 or higher)");
+        System.out.println();
+        System.out.println("\u001B[34m2. Check contents of student.txt is a valid format");
+        System.out.println("\u001B[32m-   This will check the format of all the current entries of student.txt and display an error message if incorrect");
+        System.out.println();
+        System.out.println("\u001B[34m3. Display students.txt");
+        System.out.println("\u001B[32m-   This will display all the current entries of student.txt and let you edit any incorrect entries");
+        System.out.println();
+        System.out.println("\u001B[34m4. Display status.txt");
+        System.out.println("\u001B[32m-   This will display all the content of status.txt");
+        System.out.println();
+        System.out.println("\u001B[31m5. Exit");
+        System.out.println("\u001B[33mEnter your choice: ");
     }
 }
-
