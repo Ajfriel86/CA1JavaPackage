@@ -212,6 +212,7 @@ public class FileService {
         return true; // Returns true if all validation passes
     }
 
+    // Method to validate and display file students.txt
     public void validateAndDisplayFileFormat() {
         // Check if "students.txt" is in the correct format
         boolean isValidFormat = isValidStudentFileFormat("students.txt");
