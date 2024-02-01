@@ -6,11 +6,12 @@
 //Declaring package
 package CA1JavaPackage;
 
-// Importing libraries
+// Importing necessary Java libraries
 import java.io.*;
 import java.util.List;
 import java.util.Scanner;
 
+// Define a public class named StudentService
 public class StudentService {
 
     // Method to add new student data
@@ -100,27 +101,22 @@ public class StudentService {
 
         // Write the validated student data to a file
         File file = new File("students.txt");
-        boolean append = file.exists() && file.length() > 0; // Check if file exists and is not empty
-
-        // Declares and initializes 3 different resources in a try block
-        try (FileWriter fw = new FileWriter(file, append);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter out = new PrintWriter(bw)) {
-            //  checks if the append variable is true, and if so, it adds a newline character to the output stream,    
-            if (append) {
-                out.println(); // Add a newline if appending to existing data
-            }
-            // Write student data to file
-            out.println(firstName + " " + secondName);
-            out.println(classNumber);
-            out.println(studentNumber);
-            System.out.println();
-            // Displays a message in green to state data was added
+        boolean append = file.exists() && file.length() > 0;
+    
+        // Try with resources to open and manage these resources for writing to a file.
+        try (FileWriter fw = new FileWriter(file, append);   // Open a FileWriter for the specified file
+            BufferedWriter bw = new BufferedWriter(fw);      // Wrap FileWriter in a BufferedWriter
+            PrintWriter out = new PrintWriter(bw)) {          // Wrap BufferedWriter in a PrintWriter
+            
+            // Write the student data
+            out.print(firstName + " " + secondName); // Avoid println to not add a newline after each entry
+            out.print("\n" + classNumber); // Add newline before classNumber
+            out.print("\n" + studentNumber); // Add newline before studentNumber, no newline after
+    
             System.out.println("\u001B[32mStudent data added successfully.");
         } 
-        // This catches and handles IOException exceptions that might occur during file writing, and displaying an error message in red 
+        // Catch for error handling of IOExceptions and displays an error message in red
         catch (IOException e) {
-            System.out.println();
             System.err.println("\u001B[31m!!!!!! - An error occurred while writing to the file: " + e.getMessage());
         }
     }
