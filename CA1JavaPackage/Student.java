@@ -16,35 +16,43 @@ public class Student {
         private String studentNumber;
     
         // Setters - These methods allow external code to set the values of the variables. This is part of the encapsulation principle in OOP
+        // Setter for firstname
         public void setFirstName(String firstName) {
             this.firstName = firstName;
         }
-    
+        
+        // Setter for lastname
         public void setLastName(String lastName) {
             this.lastName = lastName;
         }
     
+        // Setter for classNumber
         public void setClassNumber(int classNumber) {
             this.classNumber = classNumber;
         }
-    
+        
+        // Setter for studentNumber
         public void setStudentNumber(String studentNumber) {
             this.studentNumber = studentNumber;
         }
     
         // Getters - These methods allow external code to retrieve the values of the variables. Again, this is an implementation of encapsulation.
+        // Getter for firstname
         public String getFirstName() {
             return firstName;
         }
     
+        // Getter for lastname
         public String getLastName() {
             return lastName;
         }
     
+        // Getter for classnumber
         public int getClassNumber() {
             return classNumber;
         }
     
+        // Getter for srtudentnumber
         public String getStudentNumber() {
             return studentNumber;
         }
